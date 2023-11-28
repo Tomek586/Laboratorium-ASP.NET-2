@@ -11,7 +11,8 @@ namespace Data.Entities
     [Table("contacts")]
     public class ContactEntity
     {
-        public int Id { get; set; }
+        [Key]
+        public int ContactId { get; set; }
         [MaxLength(50)]
         [Required]
         public string Name { get; set; }

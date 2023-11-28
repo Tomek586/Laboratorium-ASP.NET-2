@@ -1,30 +1,37 @@
-﻿
-using Data.Entities;
-namespace Laboratorium_3___App.Models
+﻿using Data.Entities;
+using Laboratorium_3___App.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Sqlite;
+
+namespace Lab3___Aplikacja.Models
 {
     public class ContactMapper
     {
-        public static Contact FromEntity(ContactEntity entity)
-        {
-            return new Contact()
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                Email = entity.Email,
-                Phone = entity.Phone,
-                Birth = entity.Birth,
-            };
-        }
-
         public static ContactEntity ToEntity(Contact model)
         {
             return new ContactEntity()
             {
-                Id = model.Id,
                 Name = model.Name,
                 Email = model.Email,
-                Phone = model.Phone,
                 Birth = model.Birth,
+                Phone = model.Phone,
+                ContactId = model.Id,
+                OrganizationId = (int)model.OrganizationId
+            };
+        }
+
+        public static Contact FromEntity(ContactEntity entity)
+        {
+            return new Contact()
+            {
+                Name = entity.Name,
+                Email = entity.Email,
+                Birth = (DateTime)entity.Birth,
+                Phone = entity.Phone,
+                Id = entity.ContactId,
+                OrganizationId = entity.OrganizationId
+
             };
         }
     }

@@ -1,3 +1,4 @@
+using Lab3___Aplikacja.Models;
 using Laboratorium_3___App.Models;
 
 namespace Laboratorium_3___App

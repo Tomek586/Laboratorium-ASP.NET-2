@@ -19,7 +19,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Entities.ContactEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ContactId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -45,7 +45,7 @@ namespace Data.Migrations
                         .HasMaxLength(12)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("ContactId");
 
                     b.HasIndex("OrganizationId");
 
@@ -54,7 +54,7 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            ContactId = 1,
                             Birth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Adam",
                             Name = "AA",
@@ -63,7 +63,7 @@ namespace Data.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            ContactId = 2,
                             Birth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Ewa",
                             Name = "C#",
@@ -79,9 +79,11 @@ namespace Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -92,8 +94,14 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "Uczelnia wyższa w Krakowie",
+                            Description = "wsei krakow",
                             Name = "WSEI"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "agh krakow",
+                            Name = "AGH"
                         });
                 });
 
@@ -153,7 +161,8 @@ namespace Data.Migrations
                                 });
                         });
 
-                    b.Navigation("Adress");
+                    b.Navigation("Adress")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Data.Entities.OrganizationEntity", b =>

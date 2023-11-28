@@ -31,17 +31,25 @@ namespace Data
                 .HasForeignKey(e => e.OrganizationId);
 
             modelBuilder.Entity<OrganizationEntity>().HasData(
-     new OrganizationEntity()
-     {
-         Id = 1,
-         Name = "WSEI",
-         Description = "Uczelnia wyższa w Krakowie"
-     }
- );
+                 new OrganizationEntity()
+                 {
+                     Id = 1,
+                     Name = "WSEI",
+                     Description = "wsei krakow",
+                    
+                 },
+                 new OrganizationEntity()
+                 {
+                     Id = 2,
+                     Name = "AGH",
+                     Description = "agh krakow",
+                    
+                 }
+             ); ;
             modelBuilder.Entity<ContactEntity>().HasData(
                new ContactEntity()
                {
-                   Id = 1,
+                   ContactId = 1,
                    Name = "AA",
                    Email = "Adam",
                    Phone = "13424234",
@@ -50,7 +58,7 @@ namespace Data
                },
                new ContactEntity()
                {
-                   Id = 2,
+                   ContactId = 2,
                    Name = "C#",
                    Email = "Ewa",
                    Phone = "02879283",

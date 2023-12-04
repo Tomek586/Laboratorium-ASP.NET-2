@@ -10,25 +10,30 @@
     <div class="mb-3">
         <label asp-for="Name">Imię</label>
         <input class="form-control" asp-for="Name" />
-        <span class="tet-danger" asp-validation-for="Name"></span>
+        <span class="text-danger" asp-validation-for="Name"></span>
     </div>
 
     <div class="mb-3">
         <label asp-for="Email">E-mail</label>
         <input class="form-control" asp-for="Email" />
-        <span class="tet-danger" asp-validation-for="Email"></span>
+        <span class="text-danger" asp-validation-for="Email"></span>
     </div>
 
     <div class="mb-3">
         <label asp-for="Phone">Numer telefonu</label>
         <input class="form-control" asp-for="Phone" />
-        <span class="tet-danger" asp-validation-for="Phone"></span>
+        <span class="text-danger" asp-validation-for="Phone"></span>
     </div>
 
     <div class="mb-3">
         <label asp-for="Birth">Data urodzenia</label>
         <input class="form-control" asp-for="Birth" />
-        <span class="tet-danger" asp-validation-for="Birth"></span>
+        <span class="text-danger" asp-validation-for="Birth"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="OrganizationId">Organizacja</label>
+        <select class="form-control" asp-for="OrganizationId" asp-items=@Model.Organizations></select>
     </div>
   
 

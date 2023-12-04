@@ -36,6 +36,7 @@ namespace Data
                      Id = 1,
                      Name = "WSEI",
                      Description = "wsei krakow",
+                     
                     
                  },
                  new OrganizationEntity()
@@ -43,6 +44,7 @@ namespace Data
                      Id = 2,
                      Name = "AGH",
                      Description = "agh krakow",
+                    
                     
                  }
              ); ;

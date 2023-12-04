@@ -51,7 +51,22 @@ namespace Laboratorium_3___App.Controllers
         public IActionResult Update(int id)
         {
             var contact = _contactService.FindById(id);
-            return View(contact);
+
+            contact.Organizations = _contactService
+                .FindAllOrganizations()
+                .Select(oe => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem()
+                {
+                    Text = oe.Name,
+                    Value = oe.Id.ToString(),
+
+                }
+                ).ToList();
+
+            if (contact != null)
+            {
+                return View(contact);
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -71,7 +86,23 @@ namespace Laboratorium_3___App.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
+
             var contact = _contactService.FindById(id);
+
+            contact.Organizations = _contactService
+                .FindAllOrganizations()
+                .Select(oe => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem()
+                {
+                    Text = oe.Name,
+                    Value = oe.Id.ToString(),
+
+                }
+                ).ToList();
+
+            if (contact != null)
+            {
+                return View(contact);
+            }
             return View(contact);
         }
 

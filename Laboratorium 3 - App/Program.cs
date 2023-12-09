@@ -1,7 +1,9 @@
+using Data;
 using Lab3___Aplikacja.Models;
 using Laboratorium_3___App.Models;
+using Microsoft.AspNetCore.Identity;
 
-namespace Laboratorium_3___App
+namespace Lab3___Aplikacja
 {
     public class Program
     {
@@ -16,7 +18,11 @@ namespace Laboratorium_3___App
             builder.Services.AddRazorPages();
             builder.Services.AddSession();
 
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<AppDbContext>();
 
+
+            builder.Services.AddTransient<IContactService, EFContactService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -31,8 +37,10 @@ namespace Laboratorium_3___App
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",

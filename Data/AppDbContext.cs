@@ -59,7 +59,7 @@ namespace Data
 
             // haszowanie hasła
             PasswordHasher<IdentityUser> ph = new PasswordHasher<IdentityUser>();
-            admin.PasswordHash = ph.HashPassword(admin, "gawor");
+            admin.PasswordHash = ph.HashPassword(admin, "Gawor123!");
 
             // zapisanie użytkownika
             modelBuilder.Entity<IdentityUser>().HasData(admin);

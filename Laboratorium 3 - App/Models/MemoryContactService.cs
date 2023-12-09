@@ -1,4 +1,5 @@
 ﻿using Data.Entities;
+using Lab3___Aplikacja.Models;
 
 namespace Laboratorium_3___App.Models
 {
@@ -43,6 +44,11 @@ namespace Laboratorium_3___App.Models
         }
 
         public List<OrganizationEntity> FindAllOrganizations()
+        {
+            throw new NotImplementedException();
+        }
+
+        public PagingList<Contact> FindPage(int page, int size)
         {
             throw new NotImplementedException();
         }

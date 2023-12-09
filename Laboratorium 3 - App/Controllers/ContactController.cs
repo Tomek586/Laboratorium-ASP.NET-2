@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Laboratorium_3___App.Controllers
 {
-    [Authorize(Roles = "Admin")]
+   
     public class ContactController : Controller
     {
         static List<Contact> _contact = new List<Contact>();
@@ -120,6 +120,22 @@ namespace Laboratorium_3___App.Controllers
             _contactService.Delete(id);
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult CreateApi()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateApi(Contact model)
+        {
+            if (ModelState.IsValid)
+            {
+                _contactService.Add(model);
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
     }
 }

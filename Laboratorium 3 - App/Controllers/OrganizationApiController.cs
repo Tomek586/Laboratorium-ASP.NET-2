@@ -14,32 +14,16 @@ namespace Laboratorium_3___App.Controllers
             _context = context;
         }
 
-        [Route("filter")]
-        public IActionResult GetFilteredOrganizations(string q)
+        [HttpGet]
+        public IActionResult GetFiltered(string filter)
         {
-            var result = _context.Organizations
-                .Where(o => o.Name.ToUpper().StartsWith(q.ToUpper()))
-                .Select(o => new
-                {
-                    Id = o.Id,
-                    Name = o.Name,
-                })
-                .ToList();
-            return Ok(result);
-        }
-
-        [Route("{id}")]
-        public IActionResult GetOrganizationById(int id)
-        {
-            var entity = _context.Organizations.Find(id);
-            if (entity == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(entity);
-            }
+            return Ok(_context.Organizations
+                .Where(o => o.Name.StartsWith(filter))
+                .Select(o => new { o.Name, o.Id })
+                .ToList());
         }
     }
+
+
 }
+

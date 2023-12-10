@@ -22,55 +22,76 @@ namespace Data
             var path = Environment.GetFolderPath(folder);
             DbPath = System.IO.Path.Join(path, "contacts.db");
         }
-       
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<ContactEntity>()
                 .HasOne(e => e.Organization)
                 .WithMany(o => o.Contacts)
                 .HasForeignKey(e => e.OrganizationId);
 
-            base.OnModelCreating(modelBuilder);
+            // Remove the duplicate call to base.OnModelCreating(modelBuilder)
+            // base.OnModelCreating(modelBuilder);
 
-            string ADMIN_ID = Guid.NewGuid().ToString();
-            string ROLE_ID = Guid.NewGuid().ToString();
+            PasswordHasher<IdentityUser> ph = new PasswordHasher<IdentityUser>();
 
-            // dodanie roli administratora
-            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            var user = new IdentityUser()
             {
-                Name = "admin",
-                NormalizedName = "ADMIN",
-                Id = ROLE_ID,
-                ConcurrencyStamp = ROLE_ID
-            });
-
-            // utworzenie administratora jako użytkownika
-            var admin = new IdentityUser
-            {
-                Id = ADMIN_ID,
-                Email = "adam@wsei.edu.pl",
+                Id = Guid.NewGuid().ToString(),
+                UserName = "tomek",
+                Email = "tomek@gmail.com",
                 EmailConfirmed = true,
-                UserName = "adam",
-                NormalizedUserName = "ADMIN"
+                NormalizedEmail = "TOMEK@GMAIL.COM",
+                NormalizedUserName = "TOMEK"
             };
 
-            // haszowanie hasła
-            PasswordHasher<IdentityUser> ph = new PasswordHasher<IdentityUser>();
-            admin.PasswordHash = ph.HashPassword(admin, "Gawor123!");
+            // Hash the password
+            user.PasswordHash = ph.HashPassword(user, "Tomek123!");
 
-            // zapisanie użytkownika
-            modelBuilder.Entity<IdentityUser>().HasData(admin);
+            modelBuilder.Entity<IdentityUser>()
+                .HasData(user);
 
-            // przypisanie roli administratora użytkownikowi
-            modelBuilder.Entity<IdentityUserRole<string>>()
-            .HasData(new IdentityUserRole<string>
+            var user2 = new IdentityUser()
             {
-                RoleId = ROLE_ID,
-                UserId = ADMIN_ID
-            });
+                Id = Guid.NewGuid().ToString(),
+                UserName = "jacek",
+                Email = "jacek@gmail.com",
+                EmailConfirmed = true,
+                NormalizedEmail = "JACEK@GMAIL.COM",
+                NormalizedUserName = "JACEK"
+            };
+
+            // Hash the password for user2
+            user2.PasswordHash = ph.HashPassword(user2, "Jacek123!");
+
+            modelBuilder.Entity<IdentityUser>()
+                .HasData(user2);
+
+            // Adding the administrator role
+            var adminRole = new IdentityRole()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "admin",
+                NormalizedName = "ADMIN"
+            };
+
+            adminRole.ConcurrencyStamp = adminRole.Id;
+            modelBuilder.Entity<IdentityRole>()
+                .HasData(adminRole);
+
+            // Adding the relationship between user2 and the admin role
+            modelBuilder.Entity<IdentityUserRole<string>>()
+                .HasData(new IdentityUserRole<string>()
+                {
+                    RoleId = adminRole.Id,
+                    UserId = user2.Id
+                });
+
+
 
             modelBuilder.Entity<OrganizationEntity>().HasData(
                  new OrganizationEntity()

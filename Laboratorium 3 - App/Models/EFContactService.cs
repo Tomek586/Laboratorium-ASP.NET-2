@@ -30,7 +30,7 @@ namespace Lab3___Aplikacja.Models
             ContactEntity entity = ContactMapper.ToEntity(contact);
             _context.Update(entity);
             _context.SaveChanges();
-            
+
         }
 
         public void Delete(int id)

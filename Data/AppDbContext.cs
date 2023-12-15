@@ -12,7 +12,7 @@ namespace Data
 {
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
-      
+
         private string DbPath { get; set; }
         public DbSet<ContactEntity> Contacts { get; set; }
         public DbSet<OrganizationEntity> Organizations { get; set; }

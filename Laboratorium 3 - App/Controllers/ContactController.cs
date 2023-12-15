@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Laboratorium_3___App.Controllers
 {
-   
+    [Authorize(Roles = "admin")]
     public class ContactController : Controller
     {
         static List<Contact> _contact = new List<Contact>();
@@ -137,5 +137,11 @@ namespace Laboratorium_3___App.Controllers
             }
             return View(model);
         }
+        public IActionResult PagedIndex(int? page = 1, int? size = 2)
+        {
+
+            return View(_contactService.FindPage((int)page, (int)size));
+        }
+
     }
 }

@@ -19,6 +19,7 @@ namespace Lab3___Aplikacja
             builder.Services.AddSession();
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
 
 
@@ -37,6 +38,7 @@ namespace Lab3___Aplikacja
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseMiddleware<LastVisitCookie>();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();

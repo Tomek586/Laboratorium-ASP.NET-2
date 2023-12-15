@@ -1,8 +1,9 @@
-﻿﻿using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 
-namespace Lab3___Aplikacja.Models
+namespace Laboratorium_3___App.Models
 {
+
     public class PagingList<T>
     {
         public IEnumerable<T> Data { get; }

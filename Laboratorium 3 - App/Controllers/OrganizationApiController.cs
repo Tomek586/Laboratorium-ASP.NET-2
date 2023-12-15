@@ -23,7 +23,5 @@ namespace Laboratorium_3___App.Controllers
                 .ToList());
         }
     }
-
-
 }
 
